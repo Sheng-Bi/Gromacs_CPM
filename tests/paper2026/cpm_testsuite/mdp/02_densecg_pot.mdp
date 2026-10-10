@@ -1,0 +1,7 @@
+; Dense-matrix CG. Same problem as case 01; must agree with it.
+userint1  = 2288
+userreal1 = 19.79
+userreal2 = 4.0
+userint2  = 1           ; solver: dense-matrix conjugate gradient
+userint3  = 0
+userint4  = 0

@@ -1,0 +1,6 @@
+# Two like-charged electrodes: Q1 = +4 e (the expression), Q2 = +4 e (the parameter).
+# Without the Q2 line electrode 2 sits at -Q1 (a capacitor). The slab electrolyte is
+# neutral, so this run carries +8 e net and the code warns; that is intended here --
+# it is a solver-consistency case, not a physical one.
+Q2 = 4.0
+4.0

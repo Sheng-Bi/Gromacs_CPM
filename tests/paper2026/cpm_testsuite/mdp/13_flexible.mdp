@@ -1,0 +1,39 @@
+; Flexible (mobile) electrode, modelled on the project's own reference protocol in
+; tests/expE_flexible/pureElectrode_reference/pull.mdp: the electrode is FROZEN
+; in-plane and MOVED along z by a pull constraint, rather than integrated freely.
+;
+; Freezing x/y is what makes this work. Graphite.itp defines the electrode as
+; single-atom moleculetypes, so neighbouring carbons carry no exclusions and
+; interact through the full LJ potential -- ~1.6e+05 kJ/mol per nearest-neighbour
+; pair, ~5e+08 in total. Those forces are in-plane, so freezing x/y removes them;
+; releasing all three dimensions (as this case previously did) detonates the sheet
+; in one step and the CG then has no converged geometry to solve on.
+;
+; What this exercises: the electrode geometry CHANGES every step, so the response
+; must be rebuilt from current positions -- which is exactly what the matrix-free
+; solver is for, and what a cached matrix or frozen splines would get wrong.
+userint1  = 2288
+userreal1 = 19.79
+userreal2 = 4.0
+userint2  = 2           ; matrix-free CG -- required when the geometry moves
+userint3  = 0
+userint4  = 0
+
+freezegrps  = WaL WaU GrO
+freezedim   = Y Y Y  Y Y N  Y Y Y   ; WaU released in z only; it is driven by the pull
+
+pull                 = yes
+pull-ngroups         = 2
+pull-ncoords         = 1
+pull-group1-name     = WaL
+pull-group2-name     = WaU
+pull-coord1-type     = constraint
+pull-coord1-geometry = direction
+pull-coord1-groups   = 1 2
+pull-coord1-dim      = N N Y
+pull-coord1-vec      = 0 0 1
+pull-coord1-rate     = 5     ; 0.01 nm/step at dt=0.002 -- the geometry changes every
+                             ; step (the point of the test) without the 0.5 nm/step
+                             ; yank of the reference experiment, which swamps the
+                             ; solver comparison with trajectory chaos
+pull-coord1-start    = yes

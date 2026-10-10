@@ -1,0 +1,9 @@
+; REFERENCE for the single-electrode mode. With one electrode the charge
+; constraint is the only physical choice, and the electrode charge is set by
+; overall system neutrality.
+userint1  = 2288
+userreal1 = 19.79
+userreal2 = 4.0
+userint2  = 0
+userint3  = 1           ; single electrode
+userint4  = 1

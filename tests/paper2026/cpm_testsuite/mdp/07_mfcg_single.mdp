@@ -1,0 +1,7 @@
+; Matrix-free CG, single electrode. Must agree with case 06.
+userint1  = 2288
+userreal1 = 19.79
+userreal2 = 4.0
+userint2  = 2
+userint3  = 1
+userint4  = 1

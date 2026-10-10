@@ -1,0 +1,12 @@
+; Extended Lagrangian under a total-charge constraint.
+;
+; Exercises extended-Lagrangian charge dynamics with a fixed total electrode
+; charge. The corresponding assertion checks the realized charge in e against
+; the requested target.
+userint1  = 2288
+userreal1 = 19.79
+userreal2 = 4.0         ; requested total charge on electrode 1, in e
+userint2  = 2           ; matrix-free CG (required for extended Lagrangian)
+userint3  = 0           ; two electrodes
+userint4  = 1           ; constrain total charge
+userreal3 = 0.5         ; fictitious mass mu (>0 enables extended Lagrangian)

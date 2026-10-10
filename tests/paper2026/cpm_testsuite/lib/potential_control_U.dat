@@ -1,0 +1,6 @@
+# Time-dependent potential U(t). Read when userreal2 < 0 and userint4 = 0.
+# Lines of the form "name = value" define constants; the last non-comment line
+# is the expression. The variable t is the simulation time in ps.
+U0 = 4.0
+w  = 0.5
+U0 * sin(w * t)

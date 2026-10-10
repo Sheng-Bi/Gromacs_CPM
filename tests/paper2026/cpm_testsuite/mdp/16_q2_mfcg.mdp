@@ -1,0 +1,8 @@
+; Matrix-free CG with a fixed-charge constraint. Must agree with case 04 and
+; realise exactly userreal2 electrons on electrode 1.
+userint1  = 2288
+userreal1 = 19.79
+userreal2 = -1          ; Q1 from potential_control.dat (constant 4 e); Q2 = +4 e from its Q2 parameter
+userint2  = 2
+userint3  = 0
+userint4  = 1

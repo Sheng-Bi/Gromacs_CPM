@@ -1,0 +1,7 @@
+; Matrix-free CG -- needs no elastance matrix at all. Must agree with case 01.
+userint1  = 2288
+userreal1 = 19.79
+userreal2 = 4.0
+userint2  = 2           ; solver: matrix-free conjugate gradient
+userint3  = 0
+userint4  = 0

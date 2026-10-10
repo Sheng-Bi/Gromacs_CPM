@@ -1,0 +1,4 @@
+# Time-dependent charge Q(t). Read when userreal2 < 0 and userint4 = 1.
+# Here: a linear ramp reaching 4 e at t = 1 ps. Expression value is in e.
+Q0 = 4.0
+Q0 * t

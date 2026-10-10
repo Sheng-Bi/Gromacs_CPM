@@ -1,0 +1,8 @@
+; REFERENCE for the fixed-charge mode: matrix inversion, two electrodes,
+; total charge on electrode 1 constrained to userreal2.
+userint1  = 2288
+userreal1 = 19.79
+userreal2 = -1          ; Q1 from potential_control.dat (constant 4 e); Q2 = +4 e from its Q2 parameter
+userint2  = 0
+userint3  = 0
+userint4  = 1           ; fixed charge

@@ -1,0 +1,3 @@
+; Control: CPM disabled. The same binary must behave exactly like unmodified
+; GROMACS, including under domain decomposition.
+userint1  = 0           ; 0 => no constant-potential machinery at all

@@ -1,0 +1,8 @@
+; Per-atom Gaussian widths: userreal1 < 0 makes the code read electrode_eta.dat
+; (one eta per electrode atom). Used for bimetallic / heterogeneous electrodes.
+userint1  = 2288
+userreal1 = -1          ; negative => read electrode_eta.dat
+userreal2 = 4.0
+userint2  = 2
+userint3  = 0
+userint4  = 0

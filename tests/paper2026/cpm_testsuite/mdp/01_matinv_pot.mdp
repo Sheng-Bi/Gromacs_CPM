@@ -1,0 +1,8 @@
+; REFERENCE: matrix inversion, two electrodes, fixed potential difference.
+; This is the exact solution every other solver is checked against.
+userint1  = 2288        ; electrode atoms (must match the matrix)
+userreal1 = 19.79       ; eta, Gaussian width (nm^-1)
+userreal2 = 4.0         ; applied potential difference (V)
+userint2  = 0           ; solver: matrix inversion
+userint3  = 0           ; two electrodes
+userint4  = 0           ; fixed potential

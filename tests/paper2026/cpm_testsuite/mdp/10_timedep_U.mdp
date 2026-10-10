@@ -1,0 +1,8 @@
+; Time-dependent potential U(t): userreal2 < 0 makes the code read
+; potential_control.dat and evaluate its expression at the current time.
+userint1  = 2288
+userreal1 = 19.79
+userreal2 = -1          ; negative => read potential_control.dat
+userint2  = 2
+userint3  = 0
+userint4  = 0           ; expression is interpreted as U(t) in volts

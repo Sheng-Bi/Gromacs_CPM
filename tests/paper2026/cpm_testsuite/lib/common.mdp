@@ -1,0 +1,27 @@
+; Shared settings for every CPM test case (slab supercapacitor, 28944 atoms,
+; 2288 constant-potential electrode atoms). Case-specific CPM parameters are
+; appended by the runner.
+integrator              = md
+dt                      = 0.002
+nstlog                  = 1
+nstenergy               = 1
+nstxout                 = 0
+continuation            = yes
+constraints             = h-bonds
+constraint-algorithm    = lincs
+cutoff-scheme           = Verlet
+nstlist                 = 10
+rlist                   = 1.2
+coulombtype             = PME
+rcoulomb                = 1.2
+vdwtype                 = Cut-off
+rvdw                    = 1.2
+DispCorr                = EnerPres
+ewald_geometry          = 3dc          ; slab geometry with vacuum gaps
+fourierspacing          = 0.12
+pme_order               = 4
+ewald_rtol              = 1e-5
+tcoupl                  = no
+pcoupl                  = no
+freezegrps              = WaL WaU GrO  ; electrode + support atoms are frozen
+freezedim               = Y Y Y Y Y Y Y Y Y

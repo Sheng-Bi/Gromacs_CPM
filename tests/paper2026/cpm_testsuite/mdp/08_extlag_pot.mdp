@@ -1,0 +1,9 @@
+; Extended Lagrangian: charges are propagated as dynamical variables instead
+; of being solved each step. Requires the matrix-free solver.
+userint1  = 2288
+userreal1 = 19.79
+userreal2 = 4.0
+userint2  = 2
+userint3  = 0
+userint4  = 0
+userreal3 = 0.5         ; fictitious mass mu (>0 enables extended Lagrangian)

@@ -1,0 +1,5 @@
+build*/
+__pycache__/
+*.pyc
+tests/paper2026/cpm_testsuite/work*/
+tests/paper2026/cpm_testsuite/matrix/

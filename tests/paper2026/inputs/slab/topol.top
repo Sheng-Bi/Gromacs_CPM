@@ -1,0 +1,17 @@
+#include "ff.itp"
+#include "bmim.itp"
+#include "bf4.itp"
+#include "Graphite.itp"
+#include "tip3p.itp"
+
+[ system ]
+;name
+BmimBF4
+
+[ molecules ]
+;name  number
+WaL	 1144
+WaU	 1144
+GrO	 4576
+CAT	 736
+BF4	 736

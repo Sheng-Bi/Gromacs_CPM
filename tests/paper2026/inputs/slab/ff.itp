@@ -1,0 +1,93 @@
+[ defaults ]
+; nbfunc	comb-rule	gen-pairs	fudgeLJ	fudgeQQ
+1			2			yes		0.5		0.8333
+
+[ atomtypes ]
+; Bmim				charge
+CR   6      12.011    0.00 A    0.340   0.3598
+NA   7      14.0067   0.00 A    0.325   0.7113
+CW   6      12.011    0.00 A    0.340   0.3598
+H4   1      1.0079    0.00 A    0.1782  0.0628
+H5   1      1.0079    0.00 A    0.1782  0.0628
+CT   6      12.011    0.00 A    0.340   0.4577
+H1   1      1.0079    0.00 A    0.2471  0.0657
+HC   1      1.0079    0.00 A    0.2650  0.0657
+; BF4
+B    5      10.8110   0.00 A    0.3581  0.3975
+F    9      18.9984   0.00 A    0.3118  0.2552
+;Electrode	
+;wrx2016/6/03
+AU   79       196.967     0.00   A     0.3293   4.3932
+;tip3p model wrx 2016/06/05
+OW	8     15.99940    -0.834       A    3.15061e-01  6.36386e-01
+HW	1      1.00800     0.417       A    0.00000e+00  0.00000e+00
+; for electrodes (real wall & imaginary plane)  11.25.2009
+grC      12.0110 0       A       0.34    0.35990
+
+[ nonbond_params ]
+;i	j	f.tp	sigma	epsilon
+AU	HW	1		0.18465	0.9195285992
+
+[ bondtypes ]
+; Bmim
+CT	CT	1	0.1526	259400
+CT	H1	1	0.1080	284600
+CW	H4	1	0.1070	322200
+CR	H5	1	0.1070	318000
+CR	NA	1	0.1325	334800
+CW	NA	1	0.1378	301200
+CT	NA	1	0.1472	234400
+CW	CW	1	0.1343	343000
+CT	HC	1	0.1090	284600
+; BF4
+B	F	1	0.1389	242600
+
+[ angletypes ]
+; Bmim
+CT	CT	CT	1	109.5	334
+CT	CT	H1	1	109.5	318
+CT	CT	HC	1	109.5	310
+CT	CT	NA	1	112.2	586
+H1	CT	H1	1	109.5	292
+HC	CT	HC	1	109.5	284
+H1	CT	NA	1	109.5	460
+CW	NA	CT	1	125.7	418
+CR	NA	CT	1	126.3	418
+CW	CW	NA	1	107.1	1004
+CR	NA	CW	1	108.0	1004
+NA	CR	NA	1	109.9	1004
+H4	CW	NA	1	122.1	252
+H5	CR	NA	1	125.7	252
+CW	CW	H4	1	130.7	252
+; BF4
+F	B	F	1	109.5	418
+
+[ dihedraltypes ]
+; Bmim
+; proper dihedral
+NA	CR	NA	CW	1	180	50.21	2
+NA	CR	NA	CT	1	180	8.368	2
+H5	CR	NA	CW	1	180	6.276	2
+H5	CR	NA	CT	1	180	6.276	2
+CW	CW	NA	CR	1	180	50.21	2
+CW	CW	NA	CT	1	180	8.368	2
+H4	CW	NA	CR	1	180	8.368	2
+H4	CW	NA	CT	1	180	6.276	2
+NA	CW	CW	H4	1	180	6.276	2
+NA	CW	CW	NA	1	180	50.21	2
+H4	CW	CW	H4	1	180	6.276	2
+CT	CT	CT	H1	1	0	0.669	3
+CT	CT	CT	CT	1	0	1.046	3
+CT	CT	CT	HC	1	0	0.669	3
+NA	CT	CT	CT	1	0	1.046	3
+NA	CT	CT	HC	1	0	0.669	3
+H1	CT	CT	HC	1	0	0.628	3
+HC	CT	CT	HC	1	0	0.628	3
+H1	CT	NA	CW	1	0	1.021	3
+H1	CT	NA	CR	1	0	0.686	3
+CT	CT	NA	CW	1	0	-0.745	1
+CT	CT	NA	CR	1	0	-0.987	1
+; improper dihedral
+NA	NA	CR	H5	1	180	4.602	2
+CW	NA	CW	H4	1	180	4.602	2
+CR	CW	NA	CT	1	180	8.368	2
