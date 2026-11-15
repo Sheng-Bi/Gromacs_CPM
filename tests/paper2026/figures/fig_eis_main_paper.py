@@ -91,7 +91,7 @@ main = sorted([r for r in rows if "a025" not in r[0]], key=lambda r: float(r[1])
 f = np.array([float(r[1]) for r in main]); ReZ = np.array([float(r[9]) for r in main]); nImZ = np.array([float(r[10]) for r in main])
 ax2.plot([0, 30], [0, 30], "--", color="0.6", lw=0.7, zorder=1)
 ax2.plot(ReZ, nImZ, "o-", ms=3.6, lw=1.0, color="#1864AB", zorder=3)
-ax2.annotate("0.5 GHz", (ReZ[0], nImZ[0]), fontsize=8.06, xytext=(6, -1), textcoords="offset points", color="0.2")
+ax2.annotate("0.5 GHz", (ReZ[0], nImZ[0]), fontsize=8.06, xytext=(-8, -4), ha="right", textcoords="offset points", color="0.2")
 ax2.annotate("200 GHz", (ReZ[-1], nImZ[-1]), fontsize=8.06, xytext=(20, 10), textcoords="offset points", color="0.2",
              arrowprops=dict(arrowstyle="-", lw=0.6, color="0.45", shrinkA=0, shrinkB=2))
 ax2.set_xlim(0, 30); ax2.set_ylim(0, 30); ax2.set_aspect("equal"); ax2.set_xticks([0, 10, 20, 30]); ax2.set_yticks([0, 10, 20, 30])
@@ -107,12 +107,12 @@ for row in hf_rows:
     uncertainty = next(b for b in row["within_trajectory_block_sensitivity"] if b["block_ps"] == 80)
     zoom.errorbar(row["ReZ"], row["negImZ"], xerr=uncertainty["ReZ_sem"],
                   yerr=uncertainty["negImZ_sem"], fmt="o", ms=3, capsize=2, lw=0.7, color="#1864AB")
-    zoom.annotate(f"{row['frequency_GHz']:g}", (row["ReZ"], row["negImZ"]),
-                  xytext=(-3, 8), textcoords="offset points", fontsize=7, ha="center")
+    zoom.annotate(f"{row['frequency_GHz']:g} GHz", (row["ReZ"], row["negImZ"]),
+                  xytext=((3 if row["frequency_GHz"] == 200 else -3), 8),
+                  textcoords="offset points", fontsize=7, ha="center")
 zoom.set_xlim(0.4, 1.08); zoom.set_ylim(0.4, 1.08)
 zoom.set_xticks([0.4, 0.7, 1.0]); zoom.set_yticks([0.4, 0.7, 1.0])
 zoom.set_aspect("equal"); zoom.tick_params(labelsize=6.5, direction="in", pad=1.5)
-zoom.set_title("50--200 GHz", fontsize=7, pad=3)
 
 for ax, tag in ((ax1, "a"), (ax2, "b")):
     ax.tick_params(direction="in", top=True, labelsize=9.1, length=3)
