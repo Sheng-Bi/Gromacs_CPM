@@ -1,6 +1,5 @@
-"""Three-panel throughput figure on a 7-inch-wide canvas.
-Optional --preview5 adds a conventional-GROMACS A100 bar and writes a separate preview."""
-"""Constant-potential throughput, GROMACS vs CPM-LAMMPS (single column)."""
+#!/usr/bin/env python3
+"""Figure 3: matched CPU benchmarks with optimized ELECTRODE and A100 results."""
 import os, sys, json
 import numpy as np
 import matplotlib; matplotlib.use("Agg")
@@ -13,12 +12,13 @@ from render_atoms import read_gro, STYLE, elem_of, sphere
 HERE = os.path.dirname(os.path.abspath(__file__))
 PREVIEW5 = "--preview5" in sys.argv
 argv = [a for a in sys.argv[1:] if not a.startswith("--")]
-# A100 campaign (tests/paper2026/fairbench/RESULTS_a100.md): every bar from the 10x window (_long keys)
-VALS = argv[0] if len(argv) > 0 else os.path.join(HERE, "fiveway_values_a100.json")
-VALS_SLAB = argv[1] if len(argv) > 1 else os.path.join(HERE, "fiveway_values_slab_a100.json")
+# Matching dual-8358 CPU repeats with optimized ELECTRODE; retained historical A100 results.
+VALS = argv[0] if len(argv) > 0 else os.path.join(HERE, "../revision_round1/matched_8358_results/throughput_slit.json")
+VALS_SLAB = argv[1] if len(argv) > 1 else os.path.join(HERE, "../revision_round1/matched_8358_results/throughput_slab.json")
 WIN = "_long"   # timing window: "_long" = 20000 steps reset at 10000 (LAMMPS 10000+10000); "" = the 1000-step protocol
-GRO  = os.path.normpath(os.path.join(HERE, "..", "inputs", "slit", "run1step.gro"))
-GRO_SLAB = os.path.normpath(os.path.join(HERE, "..", "inputs", "slab", "start.gro"))
+GRO  = os.path.normpath(os.path.join(HERE, "..", "..",
+        "paper2026/inputs/slit/run1step.gro"))
+GRO_SLAB = os.path.normpath(os.path.join(HERE, "..", "..", "paper2026/inputs/slab/start.gro"))
 matplotlib.rcParams["hatch.linewidth"] = 0.5
 plt.rcParams.update({
     "font.family": "sans-serif", "font.size": 9.36,
@@ -94,22 +94,11 @@ else:
 throughput_panel(axs, D, GRO, "(b)", ["WAL1", "WAL2", "GRA"], 1.34, 1.66, ymax_a, (0.08, 0.76, 0.84, 0.15), "slit cell, 82 916 atoms")
 
 # ================= panel (c): where the added cost goes ==================
-# A100 node (cpmtiming/RESULTS_a100.txt): ms per step from dedicated wallcycle
-# sub-counters (GROMACS) and the ELECTRODE fix timers (LAMMPS), CPM step minus
-# the conventional step on the same hardware. RAW counters:
-#   GROMACS CPU 64 thr.        : (1.227, 0.780, 0.549, 0.000, 2.412)  sum 2.555   conv step 3.993
-#   GROMACS GPU 16 thr. (A100) : (0.251, 0.240, 0.074, 0.300, 0.517)  sum 0.866   conv step 1.556  (psr-only kernel, device solve)
-#   LAMMPS 64 MPI              : (5.029, 0.908, 2.123, 0.000, 8.068)  sum 8.060   conv step 10.793
-# The raw counters over-count where a region overlaps idle time the conventional
-# step already had; the residual is folded into data handling so the segments sum
-# exactly to the measured net. On the GPU the 0.30 ms wait for the electrode
-# potentials is smaller than the conventional step's own idle GPU waits, so no
-# wait is attributed (the row plots (0.251, 0.240, 0.026, 0, 0.517)).
-ADDED = {   # net-attributed ms/step: (potential, solve, data handling, net GPU wait, net, conventional step)
-    "CPU":               (1.227, 0.780, 0.406, 0.000, 2.412, 3.993),
-    "A100":              (0.251, 0.240, 0.026, 0.000, 0.517, 1.556),
-    "LAMMPS":              (5.029, 0.908, 2.131, 0.000, 8.068, 10.793),
-}
+# Counter-derived CPU costs and retained historical A100 costs, in ms/step.
+COSTS = json.load(open(os.path.join(HERE, "../revision_round1/matched_8358_results/reported-values.json")))["costs"]
+ADDED = {key: tuple(COSTS[key][x]["mean"] for x in ["potential", "solve", "handling"]) +
+         (0.0, COSTS[key]["net"]["mean"], COSTS[key]["conventional"]["mean"])
+         for key in ["CPU", "A100", "LAMMPS"]}
 SEG = [("electrode potential", "#3B7EA1"),
        ("charge solve",        "#D08770"),
        ("data handling",       "#C6C6C6")]
@@ -123,7 +112,7 @@ for x, (lab, vals) in zip(xs, ADDED.items()):
                 linewidth=0.5, zorder=3)
         bottom += v
     axb.plot([x - 0.34, x + 0.34], [vals[4], vals[4]], color="#1a1a1a", lw=1.2, zorder=5)
-    axb.text(x, vals[4] + 0.25, f"{vals[4]:.1f}\n(conv. {vals[5]:.1f})", va="bottom", ha="center",
+    axb.text(x - (0.10 if lab == "LAMMPS" else 0.0), vals[4] + 0.25, f"{vals[4]:.1f}\n(conv. {vals[5]:.1f})", va="bottom", ha="center",
              fontsize=8.19, color=INK, linespacing=1.15)
 axb.set_xticks(xs)
 axb.set_xticklabels(list(ADDED), fontsize=8.06)

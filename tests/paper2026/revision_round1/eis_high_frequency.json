@@ -1,0 +1,107 @@
+{
+  "data": [
+    {
+      "run": "eis_p5",
+      "frequency_GHz": 200.0,
+      "complete_cycles_after_discard": 99,
+      "ReZ": 0.5232298446488512,
+      "negImZ": 0.5345646551940124,
+      "nyquist_angle_deg": 45.61393016416323,
+      "within_trajectory_block_sensitivity": [
+        {
+          "block_ps": 20,
+          "blocks": 24,
+          "ReZ_sem": 0.02403119728631944,
+          "negImZ_sem": 0.01989436337912132
+        },
+        {
+          "block_ps": 40,
+          "blocks": 12,
+          "ReZ_sem": 0.021129026511088285,
+          "negImZ_sem": 0.01934363948042562
+        },
+        {
+          "block_ps": 80,
+          "blocks": 6,
+          "ReZ_sem": 0.01934216963304936,
+          "negImZ_sem": 0.016553686870950397
+        },
+        {
+          "block_ps": 160,
+          "blocks": 3,
+          "ReZ_sem": 0.01663153397028114,
+          "negImZ_sem": 0.01764539899786454
+        }
+      ]
+    },
+    {
+      "run": "eis_p10",
+      "frequency_GHz": 100.0,
+      "complete_cycles_after_discard": 49,
+      "ReZ": 0.7273047106644446,
+      "negImZ": 0.726888423547612,
+      "nyquist_angle_deg": 44.9835981248656,
+      "within_trajectory_block_sensitivity": [
+        {
+          "block_ps": 20,
+          "blocks": 24,
+          "ReZ_sem": 0.031188238538136168,
+          "negImZ_sem": 0.042073022900474516
+        },
+        {
+          "block_ps": 40,
+          "blocks": 12,
+          "ReZ_sem": 0.03492770743656075,
+          "negImZ_sem": 0.03762656900964906
+        },
+        {
+          "block_ps": 80,
+          "blocks": 6,
+          "ReZ_sem": 0.023912073511938352,
+          "negImZ_sem": 0.03676398159676573
+        },
+        {
+          "block_ps": 160,
+          "blocks": 3,
+          "ReZ_sem": 0.02096208948967291,
+          "negImZ_sem": 0.031567033217234024
+        }
+      ]
+    },
+    {
+      "run": "eis_p20",
+      "frequency_GHz": 50.0,
+      "complete_cycles_after_discard": 24,
+      "ReZ": 0.8923494456850268,
+      "negImZ": 0.9290922666783304,
+      "nyquist_angle_deg": 46.155635709718446,
+      "within_trajectory_block_sensitivity": [
+        {
+          "block_ps": 20,
+          "blocks": 24,
+          "ReZ_sem": 0.06627097656588787,
+          "negImZ_sem": 0.07106348691196288
+        },
+        {
+          "block_ps": 40,
+          "blocks": 12,
+          "ReZ_sem": 0.05804200569831849,
+          "negImZ_sem": 0.046677767472505606
+        },
+        {
+          "block_ps": 80,
+          "blocks": 6,
+          "ReZ_sem": 0.053336669118103815,
+          "negImZ_sem": 0.04650987534830542
+        },
+        {
+          "block_ps": 160,
+          "blocks": 3,
+          "ReZ_sem": 0.030187606787326255,
+          "negImZ_sem": 0.04285820887497806
+        }
+      ]
+    }
+  ],
+  "uncertainty_scope": "Within-trajectory contiguous block SEM, not independent-run uncertainty; 80 ps estimate has six blocks. Sensitivity reported; no claim of block independence."
+}

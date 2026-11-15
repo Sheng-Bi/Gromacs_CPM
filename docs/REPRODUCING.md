@@ -6,8 +6,8 @@ can be run using the inputs already included in this repository.
 Extract the code and companion data archives into the same parent directory;
 both use `Gromacs_CPM/` as their top-level directory. If using a Git clone,
 overlay the data archive's `Gromacs_CPM/tests/` onto the clone's `tests/` so
-that code and data share one `tests/paper2026/` tree. The code repository alone
-contains the runnable feature suite, but not the saved paper datasets.
+that code and data share one `tests/paper2026/` tree. The repository includes the runnable feature suite and the compact analysis data
+listed below. Other saved paper datasets are supplied by the companion archive.
 
 Install Python with NumPy, SciPy and Matplotlib. The commands below use saved
 analysis data and do not launch MD simulations or require a GPU. Analyses that
@@ -63,6 +63,39 @@ the paper. This is an analysis dataset, not a claim that every historical MD
 trajectory or benchmark binary is included. Historical performance records
 describe their original runs.
 
-The results use within-trajectory block standard errors or temporal standard
-deviations as specified in the paper. They do not replace independent replica
-uncertainties or establish equilibrium for slowly relaxing systems.
+Uncertainty definitions follow the manuscript: the +20 e nanotube means use
+independent-replica SEM (five runs per treatment), while other charge points and
+impedance estimates use the within-trajectory measures specified in the SI.
+The paired 10 ns charging control has one trajectory per treatment and carries
+no between-replica error bar.
+
+## Updated figures and validation data
+
+The compact data in `tests/paper2026/revision_round1/` reproduce the updated
+benchmark, nanotube-repeat and paired charge-ordering results. No GPU is needed
+for these analysis commands, run from the repository root:
+
+```bash
+python tests/paper2026/revision_round1/check_results.py
+python tests/paper2026/figures/fig_fiveway_paper.py
+python tests/paper2026/figures/fig_eis_main_paper.py
+python tests/paper2026/cnt_pair/fig_treatments_paper.py
+python tests/paper2026/revision_round1/fig_cnt_repeats.py
+python tests/paper2026/revision_round1/charging_pair_r1/plot_charging_pair.py
+```
+
+These generate Figures 3, 5 and 7 and SI Figures S3 and S4 next to their scripts.
+The benchmark uses optimized ELECTRODE on matched dual Xeon Platinum 8358 CPUs
+and retains the original A100 GPU measurements. New nanotube data contain ten
+free-motion trajectories as geometric traces and individual contact-force means.
+`figure7_inputs/` contains the original charge-scan summaries, coordinates and
+final-frame electrode charges needed for the other Figure 7 panels; the saved
+per-atom charge files in this directory contain the final frame only.
+
+`charging_pair_r1/` includes both complete 10 ns charge series, 100 ps bin means
+and the fixed-window statistics. The full series reproduce the 8–10 ns means
+and their subinterval values. This is a single paired realization, not a
+replica-based equivalence test.
+
+The larger MD trajectory archive remains separate. No compiled MD binary or
+private cluster configuration is needed to regenerate the listed figures.

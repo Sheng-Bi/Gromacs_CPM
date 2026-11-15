@@ -9,6 +9,7 @@ See [reproduction instructions](../../docs/REPRODUCING.md) for the full workflow
 | `inputs/slit/` | Slit coordinates and topology, supplied by the companion data archive. |
 | `cpm_testsuite/` | Runnable feature-validation cases and assertions. |
 | `figures/` | Figure-generation scripts; their saved input data come from the companion archive. |
+| `revision_round1/` | Compact data and checks for optimized benchmarks, CNT repeats and the paired charge-ordering control. |
 | `cnt_pair/` | CNT analysis scripts and, in the data archive, completed simulation outputs. |
 | `timedep/`, `eis/`, `tf/`, `gpuval3/` | Protocol, model and CPU/GPU validation analyses. |
 

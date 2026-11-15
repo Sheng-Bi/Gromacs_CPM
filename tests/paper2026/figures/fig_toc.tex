@@ -1,3 +1,5 @@
+% TOC / abstract graphic for the manuscript: Fig. 1(a) condensed to the
+% ACS box of 3.25 in x 1.75 in (8.25 cm x 4.44 cm). Compile: pdflatex fig_toc.tex
 \documentclass[tikz,border=0pt]{standalone}
 \usetikzlibrary{positioning,arrows.meta,calc}
 \definecolor{cblue}{HTML}{0072B2}
@@ -24,7 +26,7 @@
    $\mathbf{A}\,\mathbf{q}=\mathbf{b}$\\[0pt]
    fixed $\Delta U$ or $Q$\\[2pt] \bgpu};
 \node[stage] (force) at (6.98cm,2.45cm)
-  {\textbf{3.\ Forces with\\predicted charges}\\[3pt]
+  {\textbf{3.\ Evaluate\\electrostatic forces}\\[3pt]
    short + long range\\[3pt] \bsimd\,\bgpu};
 \draw[arr] (pot) -- (solve);
 \draw[arr] (solve) -- (force);
@@ -32,6 +34,6 @@
   node[pos=0.25, below=1pt, text=cgray, font=\sffamily\scriptsize]
   {next step: integrate the electrolyte};
 \node[anchor=south, text=cgray, font=\sffamily\scriptsize, align=center] at (4.125cm,0.04cm)
-  {every stage in the engine's fastest path\\faster than the established reference implementation};
+  {self-consistent electrode response\\CPU and GPU acceleration};
 \end{tikzpicture}
 \end{document}

@@ -1,16 +1,13 @@
 #!/usr/bin/env python3
-"""Constant potential vs fixed uniform charge on the two-tube bundle.
-The CNT_DATA environment variable selects the input data directory.
-(a) surface gap (inter-axis distance minus 2R) at +20/+20 e for both treatments, 0-500 ps with a 0-10 ps inset from a 20 fs rerun;
-(b) surface gap after equilibration (last 200 ps of each free run) against charge per tube;
-(c) mean contact force, same contact-start protocol, with the fixed/CPM ratio;
-(d) end views of the final frames, both treatments at +10, +20, +30 e."""
-import os, sys, numpy as np
+"""Figure 7: nanotube charge treatments, including independent-repeat SEM at +20 e."""
+import os, sys, json, numpy as np
 import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 from matplotlib.collections import LineCollection
-HERE = os.path.dirname(os.path.abspath(__file__)); DATA = os.environ.get("CNT_DATA", HERE)   # run data (CNT_DATA overrides)
+HERE = os.path.dirname(os.path.abspath(__file__)); DATA = os.environ.get("CNT_DATA", os.path.join(HERE, "..", "revision_round1", "figure7_inputs"))   # run data (CNT_DATA overrides)
+with open(os.path.join(HERE, '..', 'revision_round1', 'cnt_repeat_results', 'replica-summary.json')) as stream:
+    repeats = json.load(stream)
 T = sys.argv[1] if len(sys.argv) > 1 else os.path.join(DATA, "traces")   # COM traces (gmx traj -com on CNT1/CNT2) and az/ frames
 box = np.array([8.0, 6.0, 4.91902]); R = 0.678
 
@@ -33,14 +30,14 @@ def tag(a, letter, dx=-0.55, dy=0.11):
     """panel letter outside the axes, clear of the y label"""
     a.text(0.0, 1.0, f"({letter})", transform=a.transAxes + ScaledTranslation(dx, dy, fig.dpi_scale_trans),
            fontsize=10.0, fontweight="bold", ha="left", va="bottom")
-# ---- (a) surface gap at +20/+20 e, both treatments: 0-500 ps (1 ps frames) with a 0-10 ps inset (20 fs rerun) ----
+# ---- (a) surface gap at +20/+20 e, both treatments: 0-1000 ps (1 ps frames) with a 0-10 ps inset (20 fs rerun) ----
 CP, FX = "#1864AB", "0.35"
-t, d = trace("q20_free"); m = t <= 500; ax[0].plot(t[m], d[m] - 2 * R, "-", color=CP, lw=1.0, label="constant potential")
-t, d = trace("fq20_free"); m = t <= 500; ax[0].plot(t[m], d[m] - 2 * R, "-", color=FX, lw=1.0, label="non-polarizable")
+t, d = trace("q20_free"); m = t <= 1000; ax[0].plot(t[m], d[m] - 2 * R, "-", color=CP, lw=1.0, label="self-consistent")
+t, d = trace("fq20_free"); m = t <= 1000; ax[0].plot(t[m], d[m] - 2 * R, "-", color=FX, lw=1.0, label="uniform charge")
 ax[0].set_xlabel("time (ps)", fontsize=9.0); ax[0].set_ylabel("surface gap $d - 2R$ (nm)", fontsize=9.0); GAPLIM = (0.15, 0.95)
-ax[0].set_ylim(0.15, 1.06); ax[0].set_xlim(0, 500)
+ax[0].set_ylim(0.15, 1.06); ax[0].set_xlim(0, 1000)
 ax[0].legend(fontsize=8.0, frameon=False, loc="center left", bbox_to_anchor=(0.03, 0.375), handlelength=1.8, labelspacing=0.3)
-ax[0].text(0.97, 0.06, "$+20\\,e$ per tube", transform=ax[0].transAxes, fontsize=8.25, ha="right", va="bottom")
+ax[0].text(0.97, 0.06, "$+20\\,e$ fixed per tube", transform=ax[0].transAxes, fontsize=8.25, ha="right", va="bottom")
 axi = ax[0].inset_axes([0.36, 0.615, 0.60, 0.33])
 for r, col in (("q20_dense", CP), ("fq20_dense", FX)):
     t, d = trace(r); m = t <= 10; axi.plot(t[m], d[m] - 2 * R, "-", color=col, lw=0.8)
@@ -58,8 +55,12 @@ def gap_eq(run, window=200.0):
     m = t >= t[-1] - window; g = r[m] - 2 * R; return g.mean(), g.std()
 Qc = [0, 10, 20, 30]; gc = np.array([gap_eq(f"q{q}_free") for q in Qc])   # +5 has no fixed-charge counterpart; +40 never equilibrates within 1 ns -- both left out
 Qf = [10, 20, 30]; gf = np.array([gap_eq(f"fq{q}_free") for q in Qf])
-ax[1].axhline(1.6172 - 2 * R, color="0.6", lw=0.6, ls=":"); ax[1].text(33, 1.6172 - 2 * R - 0.018, "van der Waals contact", fontsize=8.0, color="0.4", va="top", ha="right"); ax[1].axhline(1.96 - 2 * R, color="0.6", lw=0.6, ls=":"); ax[1].text(-2.2, 1.96 - 2 * R + 0.018, "solvent-separated", fontsize=8.0, color="0.4", va="bottom", ha="left"); ax[1].errorbar(Qc, gc[:, 0], yerr=gc[:, 1], fmt="o-", color=CP, ms=4.5, lw=1.2, capsize=2, label="constant potential", zorder=3)
-ax[1].errorbar(Qf, gf[:, 0], yerr=gf[:, 1], fmt="s--", color=FX, ms=4.5, lw=1.2, capsize=2, label="non-polarizable", zorder=3)
+for model, charges, gaps in [('CPM', Qc, gc), ('uniform', Qf, gf)]:
+    result = repeats['groups'][model]['gap_nm']
+    assert result['n_independent_replicas'] == 5
+    gaps[charges.index(20)] = result['mean'], result['replica_sem']
+ax[1].axhline(1.6172 - 2 * R, color="0.6", lw=0.6, ls=":"); ax[1].text(33, 1.6172 - 2 * R - 0.018, "van der Waals contact", fontsize=8.0, color="0.4", va="top", ha="right"); ax[1].axhline(1.96 - 2 * R, color="0.6", lw=0.6, ls=":"); ax[1].text(-2.2, 1.96 - 2 * R + 0.018, "solvent-separated", fontsize=8.0, color="0.4", va="bottom", ha="left"); ax[1].errorbar(Qc, gc[:, 0], yerr=gc[:, 1], fmt="o-", color=CP, ms=4.5, lw=1.2, capsize=2, label="self-consistent", zorder=3)
+ax[1].errorbar(Qf, gf[:, 0], yerr=gf[:, 1], fmt="s--", color=FX, ms=4.5, lw=1.2, capsize=2, label="uniform charge", zorder=3)
 ax[1].set_xlabel("charge per tube (e)", fontsize=9.0); ax[1].set_ylabel("mean surface gap (nm)", fontsize=9.0)
 ax[1].set_xlim(-3, 34); ax[1].set_xticks([0, 10, 20, 30]); ax[1].set_ylim(*GAPLIM)
 ax[1].legend(fontsize=8.0, frameon=False, loc="upper left", bbox_to_anchor=(0.0, 0.93))
@@ -76,11 +77,16 @@ cpm_e = np.array([force_summary[k]["block_sem"] for k in ["q0_force", "cq10_forc
 fix = np.array([force_summary[k]["mean"] for k in ["fq10_force", "fq20_force", "fq30_force"]])
 fix_e = np.array([force_summary[k]["block_sem"] for k in ["fq10_force", "fq20_force", "fq30_force"]])
 FORCE_TO_NN = 0.0016605390671738467
-ax[2].errorbar(Q, cpm * FORCE_TO_NN, yerr=cpm_e * FORCE_TO_NN, fmt="o-", color="#1864AB", ms=6, lw=1.4, capsize=2.5, label="constant potential")
-ax[2].errorbar(Q[1:], fix * FORCE_TO_NN, yerr=fix_e * FORCE_TO_NN, fmt="s--", color="0.35", ms=6, lw=1.4, capsize=2.5, label="non-polarizable")
+for model, values, errors, index in [('CPM', cpm, cpm_e, 2), ('uniform', fix, fix_e, 1)]:
+    result = repeats['groups'][model]['repulsive_force_nN']
+    assert result['n_independent_replicas'] == 5
+    values[index] = -result['mean'] / FORCE_TO_NN
+    errors[index] = result['replica_sem'] / FORCE_TO_NN
+ax[2].errorbar(Q, cpm * FORCE_TO_NN, yerr=cpm_e * FORCE_TO_NN, fmt="o-", color="#1864AB", ms=6, lw=1.4, capsize=2.5, label="self-consistent")
+ax[2].errorbar(Q[1:], fix * FORCE_TO_NN, yerr=fix_e * FORCE_TO_NN, fmt="s--", color="0.35", ms=6, lw=1.4, capsize=2.5, label="uniform charge")
 ax[2].axhline(0, color="0.6", lw=0.6); ax[2].set_ylim(-8.0, 0.55); ax[2].set_xlim(-3, 34); ax[2].set_xticks([0, 10, 20, 30])
 ax[2].set_xlabel("charge per tube (e)", fontsize=9.0); ax[2].set_ylabel("force at contact (nN)", fontsize=9.0)
-# ---- (d-i) end-view snapshots of the final frames: constant potential (top) and fixed charge (bottom) at +10, +20, +30 e ----
+# ---- (d-i) end-view snapshots of the final frames: self-consistent fixed-total-charge (top) and fixed charge (bottom) at +10, +20, +30 e ----
 def frame(run, fixed_q=None):
     L = open(os.path.join(DATA, run, "run.gro")).read().splitlines(); n = int(L[1]); bx = np.array([float(x) for x in L[2 + n].split()[:3]])
     res = np.array([l[5:10].strip() for l in L[2:2 + n]]); nm = np.array([l[10:15].strip() for l in L[2:2 + n]])
@@ -127,7 +133,8 @@ for j, (a, (run, fq)) in enumerate(zip(axs, snaps)):
     a.set_xlim(c[0] - 2.35, c[0] + 2.35); a.set_ylim(c[1] - 2.20, c[1] + 2.20); a.set_aspect("equal")
     a.set_xticks([]); a.set_yticks([])
     x1, x2 = c[0] - dist / 2 + R, c[0] + dist / 2 - R          # ruler across the gap between the two surfaces
-    # Use an arrow without end caps to keep the facing carbon atoms visible.
+    # the two-headed arrow alone: the end caps that used to mark the surfaces sat exactly on the
+    # facing carbons, which is where the two treatments differ most, and hid them
     a.annotate("", xy=(x1, c[1]), xytext=(x2, c[1]), zorder=6,
                arrowprops=dict(arrowstyle="<|-|>", color="#212529", lw=0.9, shrinkA=0, shrinkB=0, mutation_scale=6))
     print(f"    {run}: carbon charge {q.min():+.4f} .. {q.max():+.4f} e (mean {q.mean():+.4f}), "
@@ -135,7 +142,7 @@ for j, (a, (run, fq)) in enumerate(zip(axs, snaps)):
     a.text(c[0], c[1] + R + 0.10, f"{dist - 2 * R:.2f} nm", fontsize=8.44, ha="center", va="bottom", zorder=7,   # above the tubes
            bbox=dict(boxstyle="square,pad=0.12", fc="white", ec="none", alpha=0.6))   # faint background for legibility over the water lines
     if j < 3: a.set_title(f"$+{(10, 20, 30)[j]}\\,e$ per tube", fontsize=9.56, pad=3)
-    if j % 3 == 0: a.set_ylabel("constant potential" if j == 0 else "non-polarizable", fontsize=8.25)
+    if j % 3 == 0: a.set_ylabel("self-consistent" if j == 0 else "uniform charge", fontsize=8.25)
     for sp in a.spines.values(): sp.set_linewidth(0.6)
 axs[0].scatter([], [], s=14, c="#1864AB", edgecolors="k", linewidths=0.25, label="Na$^+$"); axs[0].scatter([], [], s=14, c="#2B8A3E", edgecolors="k", linewidths=0.25, label="Cl$^-$")
 axs[0].legend(fontsize=8.0, loc="lower left", frameon=True, handletextpad=0.2, borderpad=0.3).get_frame().set_linewidth(0.5)

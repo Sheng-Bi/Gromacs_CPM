@@ -1,3 +1,6 @@
+"""Single-column manuscript layout (single-column manuscript, ~7 in wide art): derived from the
+JCP script of the same name; only figsize, subplot layout, inset placement and the
+output name differ. Generated 2026-09-12."""
 #!/usr/bin/env python3
 """Impedance figure, one column: (a) the sinusoidal drive and the charge
 response at the fastest (200 GHz) and slowest (0.5 GHz) frequencies, time in
@@ -93,11 +96,29 @@ ax2.annotate("200 GHz", (ReZ[-1], nImZ[-1]), fontsize=8.06, xytext=(20, 10), tex
              arrowprops=dict(arrowstyle="-", lw=0.6, color="0.45", shrinkA=0, shrinkB=2))
 ax2.set_xlim(0, 30); ax2.set_ylim(0, 30); ax2.set_aspect("equal"); ax2.set_xticks([0, 10, 20, 30]); ax2.set_yticks([0, 10, 20, 30])
 ax2.set_xlabel(r"Re $Z$ (V ps e$^{-1}$)", fontsize=10.0); ax2.set_ylabel(r"$-$Im $Z$ (V ps e$^{-1}$)", fontsize=10.0)
+
+# High-frequency enlargement; errors are within-trajectory 80 ps block SEM.
+import json
+with open(os.path.join(HERE, "..", "revision_round1", "eis_high_frequency.json")) as stream:
+    hf_rows = json.load(stream)["data"]
+zoom = ax2.inset_axes([0.43, 0.46, 0.53, 0.49])
+zoom.plot([0, 1.2], [0, 1.2], "--", color="0.6", lw=0.6)
+for row in hf_rows:
+    uncertainty = next(b for b in row["within_trajectory_block_sensitivity"] if b["block_ps"] == 80)
+    zoom.errorbar(row["ReZ"], row["negImZ"], xerr=uncertainty["ReZ_sem"],
+                  yerr=uncertainty["negImZ_sem"], fmt="o", ms=3, capsize=2, lw=0.7, color="#1864AB")
+    zoom.annotate(f"{row['frequency_GHz']:g}", (row["ReZ"], row["negImZ"]),
+                  xytext=(-3, 8), textcoords="offset points", fontsize=7, ha="center")
+zoom.set_xlim(0.4, 1.08); zoom.set_ylim(0.4, 1.08)
+zoom.set_xticks([0.4, 0.7, 1.0]); zoom.set_yticks([0.4, 0.7, 1.0])
+zoom.set_aspect("equal"); zoom.tick_params(labelsize=6.5, direction="in", pad=1.5)
+zoom.set_title("50--200 GHz", fontsize=7, pad=3)
+
 for ax, tag in ((ax1, "a"), (ax2, "b")):
     ax.tick_params(direction="in", top=True, labelsize=9.1, length=3)
     for s in ax.spines.values(): s.set_linewidth(0.8)
 PS.tag(axU, "a", dx=-0.50); PS.tag(ax2, "b", dx=-0.50)
-SLIT = os.path.normpath(os.path.join(HERE, "..", "inputs", "slit", "run1step.gro"))
+SLIT = os.path.normpath(os.path.join(HERE, "..", "..", "paper2026/inputs/slit/run1step.gro"))
 # below the 45 deg line, clear of it: at the inset's top edge (y = 0.215) the line sits at x = 0.215
 system_inset(ax2, SLIT, ["WAL1", "WAL2", "GRA"], 1.34, 1.66, (0.44, 0.085, 0.54, 0.13))
 ax2.text(0.985, 0.235, "slit cell: Na$_2$SO$_4$(aq) / graphite", transform=ax2.transAxes, fontsize=8.06, color="0.3", ha="right")

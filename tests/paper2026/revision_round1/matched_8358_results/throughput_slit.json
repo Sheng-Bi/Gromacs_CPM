@@ -1,0 +1,53 @@
+{
+  "gmx_conv_long": 49.684333333333335,
+  "gmx_conv_long_sd": 0.3413829716510987,
+  "gmx_conv_long_reps": [
+    49.656,
+    49.358,
+    50.039
+  ],
+  "gmx_cpm_long": 26.786333333333335,
+  "gmx_cpm_long_sd": 0.1974900841392644,
+  "gmx_cpm_long_reps": [
+    26.713,
+    27.01,
+    26.636
+  ],
+  "lmp_conp_long": 11.127666666666666,
+  "lmp_conp_long_sd": 0.03200520790954746,
+  "lmp_conp_long_reps": [
+    11.142,
+    11.15,
+    11.091
+  ],
+  "gmx_conv_gpu_long": 115.27,
+  "gmx_conv_gpu_long_sd": 0.838,
+  "gmx_conv_gpu_long_reps": [
+    115.996,
+    114.353,
+    115.462
+  ],
+  "gmx_cpm_gpu_long": 82.723,
+  "gmx_cpm_gpu_long_sd": 0.148,
+  "gmx_cpm_gpu_long_reps": [
+    82.803,
+    82.553,
+    82.814
+  ],
+  "_provenance": {
+    "cpu": {
+      "archive_sha256": "9a6b19dd7cdf15fd8138ca1e03b5d6feea5943e8bbdbf3ab9e3aa798f2cdd3e1",
+      "verified_at": 1794731049.5206356,
+      "case": {
+        "name": "benchmark_slit",
+        "kind": "benchmark",
+        "system": "slit",
+        "platform": "matching_cpu_8358"
+      }
+    },
+    "gpu_source": "tests/paper2026/figures/fiveway_values_a100.json",
+    "gpu_source_sha256": "3c8928963bacc10dc85838f4daa9bfa942e6e347db2ac0ba7a71678ad6acc1d3",
+    "lammps": "ELECTRODE etypes on, INTEL mixed, 64 MPI ranks",
+    "host": "dual Xeon Platinum8358, 64 physical cores; CPU fat001, historical GPU gpu001/gpu002"
+  }
+}

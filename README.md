@@ -46,7 +46,9 @@ failures and skipped cases. Python analysis uses NumPy, SciPy and Matplotlib.
 
 The companion data archive extracts into this same directory. It supplies the
 saved measurements, simulation inputs and completed CNT trajectories used by
-`tests/paper2026/`. See [reproduction instructions](docs/REPRODUCING.md).
+`tests/paper2026/`. See [reproduction instructions](docs/REPRODUCING.md), including the saved data
+and commands for the optimized benchmarks, independent nanotube repeats and
+paired 10 ns charge-ordering control.
 The versioned code and companion data archives will accompany publication.
 
 ## License

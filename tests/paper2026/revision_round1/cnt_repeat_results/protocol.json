@@ -1,0 +1,16 @@
+{
+  "replicas_per_model": 5,
+  "free_equil_ps": 100,
+  "free_ps": 1000,
+  "contact_ps": 120,
+  "contact_discard_ps": 20,
+  "gap_window_ps": [
+    800,
+    1000
+  ],
+  "seed_pairing": "Same velocity/thermostat seeds within each treatment pair; distinct between replicas.",
+  "contact_start": "Coordinates extracted from archived cq20_force TPR, common to both models; separate contact protocol, not free-trajectory endpoint.",
+  "constraint": "Independent +20 e on each 800-carbon tube; uniform model +0.025 e/carbon.",
+  "runtime_source": "October corrected-ordering runtime; original hashes retained.",
+  "caveat": "Independent thermal seeds from common geometries do not establish equilibrium basin sampling."
+}

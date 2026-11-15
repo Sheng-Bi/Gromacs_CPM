@@ -1,0 +1,341 @@
+{
+  "individual_gaps": [
+    {
+      "case": "free_cpm_r2",
+      "replica": 2,
+      "model": "CPM",
+      "mean_gap_nm": 0.36615765160715524,
+      "within_run_gap_sd_nm": 0.01115063620436202,
+      "gap_window_ps": [
+        800,
+        1000
+      ],
+      "opening_detected": false,
+      "opening_start_ps": null,
+      "longest_open_interval_ps": 0.0,
+      "opening_definition": "minimum C--C distance >0.6 nm continuously for >50 ps",
+      "sampling_interval_ps": 1.0,
+      "complete_trajectory_ps": 1000.0
+    },
+    {
+      "case": "free_cpm_r4",
+      "replica": 4,
+      "model": "CPM",
+      "mean_gap_nm": 0.36709647384240757,
+      "within_run_gap_sd_nm": 0.010978613011766102,
+      "gap_window_ps": [
+        800,
+        1000
+      ],
+      "opening_detected": false,
+      "opening_start_ps": null,
+      "longest_open_interval_ps": 0.0,
+      "opening_definition": "minimum C--C distance >0.6 nm continuously for >50 ps",
+      "sampling_interval_ps": 1.0,
+      "complete_trajectory_ps": 1000.0
+    },
+    {
+      "case": "free_cpm_r5",
+      "replica": 5,
+      "model": "CPM",
+      "mean_gap_nm": 0.3684559812589479,
+      "within_run_gap_sd_nm": 0.011538346637746456,
+      "gap_window_ps": [
+        800,
+        1000
+      ],
+      "opening_detected": false,
+      "opening_start_ps": null,
+      "longest_open_interval_ps": 0.0,
+      "opening_definition": "minimum C--C distance >0.6 nm continuously for >50 ps",
+      "sampling_interval_ps": 1.0,
+      "complete_trajectory_ps": 1000.0
+    },
+    {
+      "case": "free_cpm_r1",
+      "replica": 1,
+      "model": "CPM",
+      "mean_gap_nm": 0.36596587265026315,
+      "within_run_gap_sd_nm": 0.011225727249599894,
+      "gap_window_ps": [
+        800,
+        1000
+      ],
+      "opening_detected": false,
+      "opening_start_ps": null,
+      "longest_open_interval_ps": 0.0,
+      "opening_definition": "minimum C--C distance >0.6 nm continuously for >50 ps",
+      "sampling_interval_ps": 1.0,
+      "complete_trajectory_ps": 1000.0
+    },
+    {
+      "case": "free_cpm_r3",
+      "replica": 3,
+      "model": "CPM",
+      "mean_gap_nm": 0.36922717422704704,
+      "within_run_gap_sd_nm": 0.011360618680711936,
+      "gap_window_ps": [
+        800,
+        1000
+      ],
+      "opening_detected": false,
+      "opening_start_ps": null,
+      "longest_open_interval_ps": 0.0,
+      "opening_definition": "minimum C--C distance >0.6 nm continuously for >50 ps",
+      "sampling_interval_ps": 1.0,
+      "complete_trajectory_ps": 1000.0
+    },
+    {
+      "case": "free_uniform_r3",
+      "replica": 3,
+      "model": "uniform",
+      "mean_gap_nm": 0.6109333643982781,
+      "within_run_gap_sd_nm": 0.014064552549526262,
+      "gap_window_ps": [
+        800,
+        1000
+      ],
+      "opening_detected": false,
+      "opening_start_ps": null,
+      "longest_open_interval_ps": 9.0,
+      "opening_definition": "minimum C--C distance >0.6 nm continuously for >50 ps",
+      "sampling_interval_ps": 1.0,
+      "complete_trajectory_ps": 1000.0
+    },
+    {
+      "case": "free_uniform_r1",
+      "replica": 1,
+      "model": "uniform",
+      "mean_gap_nm": 0.6116927315419013,
+      "within_run_gap_sd_nm": 0.015032803561761501,
+      "gap_window_ps": [
+        800,
+        1000
+      ],
+      "opening_detected": false,
+      "opening_start_ps": null,
+      "longest_open_interval_ps": 22.0,
+      "opening_definition": "minimum C--C distance >0.6 nm continuously for >50 ps",
+      "sampling_interval_ps": 1.0,
+      "complete_trajectory_ps": 1000.0
+    },
+    {
+      "case": "free_uniform_r5",
+      "replica": 5,
+      "model": "uniform",
+      "mean_gap_nm": 0.6104571232614912,
+      "within_run_gap_sd_nm": 0.014019053856108165,
+      "gap_window_ps": [
+        800,
+        1000
+      ],
+      "opening_detected": false,
+      "opening_start_ps": null,
+      "longest_open_interval_ps": 14.0,
+      "opening_definition": "minimum C--C distance >0.6 nm continuously for >50 ps",
+      "sampling_interval_ps": 1.0,
+      "complete_trajectory_ps": 1000.0
+    },
+    {
+      "case": "free_uniform_r4",
+      "replica": 4,
+      "model": "uniform",
+      "mean_gap_nm": 0.6133832668450513,
+      "within_run_gap_sd_nm": 0.013697862705463084,
+      "gap_window_ps": [
+        800,
+        1000
+      ],
+      "opening_detected": false,
+      "opening_start_ps": null,
+      "longest_open_interval_ps": 17.0,
+      "opening_definition": "minimum C--C distance >0.6 nm continuously for >50 ps",
+      "sampling_interval_ps": 1.0,
+      "complete_trajectory_ps": 1000.0
+    },
+    {
+      "case": "free_uniform_r2",
+      "replica": 2,
+      "model": "uniform",
+      "mean_gap_nm": 0.6088295388539141,
+      "within_run_gap_sd_nm": 0.014194009175727666,
+      "gap_window_ps": [
+        800,
+        1000
+      ],
+      "opening_detected": false,
+      "opening_start_ps": null,
+      "longest_open_interval_ps": 9.0,
+      "opening_definition": "minimum C--C distance >0.6 nm continuously for >50 ps",
+      "sampling_interval_ps": 1.0,
+      "complete_trajectory_ps": 1000.0
+    }
+  ],
+  "individual_contact_forces": [
+    {
+      "case": "contact_cpm_r3",
+      "replica": 3,
+      "model": "CPM",
+      "signed_constraint_force_kJ_mol_nm": -1299.7294101098903,
+      "repulsive_force_nN": 2.1582514622422915,
+      "window_ps": [
+        20,
+        120
+      ]
+    },
+    {
+      "case": "contact_cpm_r5",
+      "replica": 5,
+      "model": "CPM",
+      "signed_constraint_force_kJ_mol_nm": -1272.5616225674326,
+      "repulsive_force_nN": 2.113138289659361,
+      "window_ps": [
+        20,
+        120
+      ]
+    },
+    {
+      "case": "contact_cpm_r1",
+      "replica": 1,
+      "model": "CPM",
+      "signed_constraint_force_kJ_mol_nm": -1271.9278236263735,
+      "repulsive_force_nN": 2.112085841756999,
+      "window_ps": [
+        20,
+        120
+      ]
+    },
+    {
+      "case": "contact_cpm_r4",
+      "replica": 4,
+      "model": "CPM",
+      "signed_constraint_force_kJ_mol_nm": -1327.2829644985015,
+      "repulsive_force_nN": 2.2040052157440795,
+      "window_ps": [
+        20,
+        120
+      ]
+    },
+    {
+      "case": "contact_cpm_r2",
+      "replica": 2,
+      "model": "CPM",
+      "signed_constraint_force_kJ_mol_nm": -1253.6341813386614,
+      "repulsive_force_nN": 2.08170853405735,
+      "window_ps": [
+        20,
+        120
+      ]
+    },
+    {
+      "case": "contact_uniform_r1",
+      "replica": 1,
+      "model": "uniform",
+      "signed_constraint_force_kJ_mol_nm": -2899.852578701298,
+      "repulsive_force_nN": 4.815318495978327,
+      "window_ps": [
+        20,
+        120
+      ]
+    },
+    {
+      "case": "contact_uniform_r3",
+      "replica": 3,
+      "model": "uniform",
+      "signed_constraint_force_kJ_mol_nm": -3262.5610895104896,
+      "repulsive_force_nN": 5.417610148173438,
+      "window_ps": [
+        20,
+        120
+      ]
+    },
+    {
+      "case": "contact_uniform_r5",
+      "replica": 5,
+      "model": "uniform",
+      "signed_constraint_force_kJ_mol_nm": -3152.248356543457,
+      "repulsive_force_nN": 5.234431545474963,
+      "window_ps": [
+        20,
+        120
+      ]
+    },
+    {
+      "case": "contact_uniform_r4",
+      "replica": 4,
+      "model": "uniform",
+      "signed_constraint_force_kJ_mol_nm": -2938.57366011988,
+      "repulsive_force_nN": 4.879616364397102,
+      "window_ps": [
+        20,
+        120
+      ]
+    },
+    {
+      "case": "contact_uniform_r2",
+      "replica": 2,
+      "model": "uniform",
+      "signed_constraint_force_kJ_mol_nm": -2925.905588211788,
+      "repulsive_force_nN": 4.858580536087948,
+      "window_ps": [
+        20,
+        120
+      ]
+    }
+  ],
+  "groups": {
+    "CPM": {
+      "gap_nm": {
+        "n_independent_replicas": 5,
+        "mean": 0.3673806307171642,
+        "replica_sd": 0.0014268904252303597,
+        "replica_sem": 0.000638124797451733,
+        "mean_95pct_t_interval": [
+          0.365608912246774,
+          0.3691523491875544
+        ],
+        "planned_replica_count_reached": true
+      },
+      "opened": 0,
+      "repulsive_force_nN": {
+        "n_independent_replicas": 5,
+        "mean": 2.1338378686920163,
+        "replica_sd": 0.04779793646101944,
+        "replica_sem": 0.021375887022211038,
+        "mean_95pct_t_interval": [
+          2.0744888917999376,
+          2.193186845584095
+        ],
+        "planned_replica_count_reached": true
+      }
+    },
+    "uniform": {
+      "gap_nm": {
+        "n_independent_replicas": 5,
+        "mean": 0.6110592049801271,
+        "replica_sd": 0.00166975812161565,
+        "replica_sem": 0.0007467385331829909,
+        "mean_95pct_t_interval": [
+          0.6089859264348086,
+          0.6131324835254456
+        ],
+        "planned_replica_count_reached": true
+      },
+      "opened": 0,
+      "repulsive_force_nN": {
+        "n_independent_replicas": 5,
+        "mean": 5.041111418022355,
+        "replica_sd": 0.2690281510985544,
+        "replica_sem": 0.12031304674349046,
+        "mean_95pct_t_interval": [
+          4.707068848299958,
+          5.375153987744753
+        ],
+        "planned_replica_count_reached": true
+      }
+    }
+  },
+  "uncertainty": "SD and SEM across independent replica means, never frames.",
+  "force_sign": "Negative constraint force opposes repulsion; report repulsion as minus the signed constraint force.",
+  "interpretation": "Opening incidence within 1 ns is kinetic evidence; no-opening is not proof of equilibrium binding."
+}

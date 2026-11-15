@@ -1,0 +1,53 @@
+{
+  "gmx_conv_long": 109.047,
+  "gmx_conv_long_sd": 0.13318783728253555,
+  "gmx_conv_long_reps": [
+    109.137,
+    109.11,
+    108.894
+  ],
+  "gmx_cpm_long": 72.60933333333334,
+  "gmx_cpm_long_sd": 0.02720906711618798,
+  "gmx_cpm_long_reps": [
+    72.578,
+    72.627,
+    72.623
+  ],
+  "lmp_conp_long": 25.808666666666667,
+  "lmp_conp_long_sd": 0.008144527815247653,
+  "lmp_conp_long_reps": [
+    25.805,
+    25.818,
+    25.803
+  ],
+  "gmx_conv_gpu_long": 470.858,
+  "gmx_conv_gpu_long_sd": 10.457,
+  "gmx_conv_gpu_long_reps": [
+    458.99,
+    474.867,
+    478.718
+  ],
+  "gmx_cpm_gpu_long": 254.546,
+  "gmx_cpm_gpu_long_sd": 2.677,
+  "gmx_cpm_gpu_long_reps": [
+    255.967,
+    251.458,
+    256.213
+  ],
+  "_provenance": {
+    "cpu": {
+      "archive_sha256": "abf0d8d7b7a782ddc6527b63c11e8278993082ce2f6a63a6ac673a621fe17e47",
+      "verified_at": 1794719132.771978,
+      "case": {
+        "name": "benchmark_slab",
+        "kind": "benchmark",
+        "system": "slab",
+        "platform": "matching_cpu_8358"
+      }
+    },
+    "gpu_source": "tests/paper2026/figures/fiveway_values_slab_a100.json",
+    "gpu_source_sha256": "b1909600c0aab704accfbd81ae4810d10ade3d9078513b9b68ce20154979acbf",
+    "lammps": "ELECTRODE etypes on, INTEL mixed, 64 MPI ranks",
+    "host": "dual Xeon Platinum8358, 64 physical cores; CPU fat001, historical GPU gpu001/gpu002"
+  }
+}

@@ -1,0 +1,238 @@
+{
+  "systems": {
+    "slab": {
+      "conv_cpu64": {
+        "mean": 109.047,
+        "sd": 0.13318783728253555,
+        "replicates": [
+          109.137,
+          109.11,
+          108.894
+        ]
+      },
+      "cpu64": {
+        "mean": 72.60933333333334,
+        "sd": 0.02720906711618798,
+        "replicates": [
+          72.578,
+          72.627,
+          72.623
+        ]
+      },
+      "split_on": {
+        "mean": 25.808666666666667,
+        "sd": 0.008144527815247653,
+        "replicates": [
+          25.805,
+          25.818,
+          25.803
+        ]
+      },
+      "cpu_ratio": 2.8133701857257254,
+      "gpu_ratio": 9.862810942060806,
+      "control_change_percent": {
+        "conv_cpu64": 0.563466007598934,
+        "cpu64": 0.12180379935926577
+      }
+    },
+    "slit": {
+      "conv_cpu64": {
+        "mean": 49.684333333333335,
+        "sd": 0.3413829716510987,
+        "replicates": [
+          49.656,
+          49.358,
+          50.039
+        ]
+      },
+      "cpu64": {
+        "mean": 26.786333333333335,
+        "sd": 0.1974900841392644,
+        "replicates": [
+          26.713,
+          27.01,
+          26.636
+        ]
+      },
+      "split_on": {
+        "mean": 11.127666666666666,
+        "sd": 0.03200520790954746,
+        "replicates": [
+          11.142,
+          11.15,
+          11.091
+        ]
+      },
+      "cpu_ratio": 2.4071832968876374,
+      "gpu_ratio": 7.433993349908636,
+      "control_change_percent": {
+        "conv_cpu64": 3.837847628601687,
+        "cpu64": 1.9848975188781148
+      }
+    }
+  },
+  "costs": {
+    "CPU": {
+      "potential": {
+        "mean": 1.2541864533866534,
+        "sd": 0.01966739872322528,
+        "replicates": [
+          1.2331917020744814,
+          1.257185703574106,
+          1.2721819545113724
+        ]
+      },
+      "nonbonded_potential": {
+        "mean": 0.6003499125218695,
+        "sd": 0.017850858621013724,
+        "replicates": [
+          0.5806048487878033,
+          0.6050987253186701,
+          0.6153461634591353
+        ]
+      },
+      "solve": {
+        "mean": 0.7935516120969758,
+        "sd": 0.023841209341041746,
+        "replicates": [
+          0.768057985503624,
+          0.7973006748312922,
+          0.815296175956011
+        ]
+      },
+      "handling": {
+        "mean": 0.4755477797217365,
+        "sd": 0.040637974944800065,
+        "replicates": [
+          0.47713071732067003,
+          0.43414146463384207,
+          0.5153711572106975
+        ]
+      },
+      "net": {
+        "mean": 2.5232858452053657,
+        "sd": 0.06909420041286009,
+        "replicates": [
+          2.4783804048987754,
+          2.4886278430392403,
+          2.602849287678081
+        ]
+      },
+      "conventional": {
+        "mean": 3.9194368074648005,
+        "sd": 0.015253015818081923,
+        "replicates": [
+          3.9065233691577106,
+          3.936265933516621,
+          3.91552111972007
+        ]
+      },
+      "cpm": {
+        "mean": 6.442722652670166,
+        "sd": 0.06849625662409597,
+        "replicates": [
+          6.384903774056486,
+          6.424893776555861,
+          6.518370407398151
+        ]
+      }
+    },
+    "LAMMPS": {
+      "potential": {
+        "mean": 3.0546666666666664,
+        "sd": 0.023960036171369267,
+        "replicates": [
+          3.0685,
+          3.0685,
+          3.027
+        ]
+      },
+      "solve": {
+        "mean": 0.9563333333333333,
+        "sd": 0.007094598884597594,
+        "replicates": [
+          0.964,
+          0.955,
+          0.95
+        ]
+      },
+      "handling": {
+        "mean": 1.3593000000000015,
+        "sd": 0.03981243524327613,
+        "replicates": [
+          1.3516000000000021,
+          1.3239000000000005,
+          1.402400000000002
+        ]
+      },
+      "net": {
+        "mean": 5.370300000000001,
+        "sd": 0.019970728579599625,
+        "replicates": [
+          5.384100000000002,
+          5.3474,
+          5.379400000000002
+        ]
+      },
+      "conventional": {
+        "mean": 10.865533333333333,
+        "sd": 0.07450163309172073,
+        "replicates": [
+          10.8578,
+          10.9436,
+          10.7952
+        ]
+      },
+      "cpm": {
+        "mean": 16.235833333333336,
+        "sd": 0.0584366608674149,
+        "replicates": [
+          16.2419,
+          16.291,
+          16.1746
+        ]
+      }
+    },
+    "A100": {
+      "potential": {
+        "mean": 0.251
+      },
+      "solve": {
+        "mean": 0.24
+      },
+      "handling": {
+        "mean": 0.026
+      },
+      "net": {
+        "mean": 0.517
+      },
+      "conventional": {
+        "mean": 1.556
+      },
+      "source": "tests/paper2026/cpmtiming/RESULTS_a100.txt, PRIMARY ead19302 GPU row; retained historical measurement"
+    }
+  },
+  "provenance": {
+    "slab": {
+      "archive_sha256": "abf0d8d7b7a782ddc6527b63c11e8278993082ce2f6a63a6ac673a621fe17e47",
+      "verified_at": 1794719132.771978,
+      "case": {
+        "name": "benchmark_slab",
+        "kind": "benchmark",
+        "system": "slab",
+        "platform": "matching_cpu_8358"
+      }
+    },
+    "slit": {
+      "archive_sha256": "9a6b19dd7cdf15fd8138ca1e03b5d6feea5943e8bbdbf3ab9e3aa798f2cdd3e1",
+      "verified_at": 1794731049.5206356,
+      "case": {
+        "name": "benchmark_slit",
+        "kind": "benchmark",
+        "system": "slit",
+        "platform": "matching_cpu_8358"
+      }
+    }
+  },
+  "cost_definition": "ms/step; GROMACS wallcycle totals/counters divided by4001 counted steps; LAMMPS last1000-step loop and cumulative fix timers divided by2000; data handling is net minus potential and solve, including residual. No optimization-off throughput."
+}
