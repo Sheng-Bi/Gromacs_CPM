@@ -1,0 +1,64 @@
+Bootstrap: docker
+# nvidia/cuda:11.6.2-devel-ubuntu20.04 (immutable multi-platform manifest)
+From: nvidia/cuda@sha256:bf4c3628625d7d14e1a37a99fb57a91382fc3dcf9875665479ee177d59e93438
+
+%labels
+    org.opencontainers.image.title GROMACS-CPM
+    org.opencontainers.image.description Constant-potential molecular dynamics with CPU and CUDA kernels
+    org.opencontainers.image.source https://github.com/Sheng-Bi/Gromacs_CPM
+    org.opencontainers.image.licenses LGPL-2.1-or-later
+    org.opencontainers.image.version 2020-cpm
+
+%files
+    gromacs /opt/source/gromacs
+    COPYING /opt/source/COPYING
+    tests/paper2026/cpm_testsuite/run_tests.sh /opt/cpm/examples/cpm_testsuite/run_tests.sh
+    tests/paper2026/cpm_testsuite/check.py /opt/cpm/examples/cpm_testsuite/check.py
+    tests/paper2026/cpm_testsuite/mdp /opt/cpm/examples/cpm_testsuite/mdp
+    tests/paper2026/cpm_testsuite/lib /opt/cpm/examples/cpm_testsuite/lib
+    tests/paper2026/cpm_testsuite/README.md /opt/cpm/examples/cpm_testsuite/README.md
+    tests/paper2026/inputs/slab /opt/cpm/examples/inputs/slab
+    containers/smoke-test.sh /opt/cpm/bin/smoke-test
+
+%post
+    set -eu
+    export DEBIAN_FRONTEND=noninteractive
+    apt-get -o APT::Sandbox::User=root update
+    apt-get -o APT::Sandbox::User=root install -y --no-install-recommends \
+        build-essential cmake libfftw3-dev python3 python3-numpy ca-certificates
+    cmake -S /opt/source/gromacs -B /opt/build \
+        -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=/opt/gromacs-cpm \
+        -DGMX_GPU=ON -DCUDA_TOOLKIT_ROOT_DIR=/usr/local/cuda \
+        -DGMX_CUDA_TARGET_SM="60;70;75;80;86" -DGMX_CUDA_TARGET_COMPUTE=86 \
+        -DGMX_MPI=OFF -DGMX_THREAD_MPI=ON -DGMX_OPENMP=ON \
+        -DGMX_SIMD=AVX2_256 -DGMX_BUILD_OWN_FFTW=OFF \
+        -DREGRESSIONTEST_DOWNLOAD=OFF -DBUILD_TESTING=OFF
+    cmake --build /opt/build --parallel 4
+    cmake --install /opt/build
+    mkdir -p /opt/cpm/build-info
+    cp /opt/build/CMakeCache.txt /opt/cpm/build-info/
+    /opt/gromacs-cpm/bin/gmx --version > /opt/cpm/build-info/gromacs-version.txt 2>&1
+    dpkg-query -W > /opt/cpm/build-info/packages.txt
+    (cd /opt/source && find gromacs -type f -print0 | sort -z | xargs -0 sha256sum) \
+        > /opt/cpm/build-info/source-sha256.txt
+    chmod 755 /opt/cpm/bin/smoke-test
+    rm -rf /opt/build /var/lib/apt/lists/*
+    apt-get clean
+
+%environment
+    export PATH=/opt/gromacs-cpm/bin:/opt/cpm/bin:$PATH
+    export LD_LIBRARY_PATH=/opt/gromacs-cpm/lib:${LD_LIBRARY_PATH:-}
+    export GMXDATA=/opt/gromacs-cpm/share/gromacs
+
+%runscript
+    exec /opt/gromacs-cpm/bin/gmx "$@"
+
+%test
+    /opt/gromacs-cpm/bin/gmx --version
+
+%help
+    GROMACS-CPM for x86-64 CPUs with AVX2 and optional NVIDIA GPUs.
+    apptainer run gromacs-cpm.sif --version
+    apptainer exec gromacs-cpm.sif smoke-test /path/to/new/output cpu
+    apptainer exec --nv gromacs-cpm.sif smoke-test /path/to/new/output gpu
+    Build from the repository root. See containers/README.md.

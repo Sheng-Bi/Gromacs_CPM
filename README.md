@@ -21,6 +21,9 @@ Use `-DGMX_GPU=OFF` for a CPU build. Keep SIMD enabled. A verified toolchain is
 GCC 11 with CUDA 11.6 and AVX2; choose CUDA architecture flags for your GPU.
 See [the user guide](docs/CPM_USER_GUIDE.md) for parameters and worked examples.
 
+For a packaged build and short validation examples, see the
+[Apptainer container instructions](containers/README.md).
+
 ## Run and verify
 
 CPM runs require a single MPI rank (`-ntmpi 1`). Matrix-based solvers require
