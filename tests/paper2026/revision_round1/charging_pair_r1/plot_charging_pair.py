@@ -7,7 +7,8 @@ import matplotlib.pyplot as plt
 
 HERE = Path(__file__).resolve().parent
 x = np.loadtxt(HERE / 'charge_100ps_means.dat')
-fig, ax = plt.subplots(figsize=(5.0, 3.0), layout='constrained')
+fig, ax = plt.subplots(figsize=(3.5, 3.5), layout='constrained')
+ax.set_box_aspect(1)
 for col, label, color in [(1, 'Predicted charges', '#1864AB'),
                           (2, 'Freshly solved charges', '#cf6924')]:
     ax.plot(x[:, 0], x[:, col], color=color, lw=1.2, label=label)
