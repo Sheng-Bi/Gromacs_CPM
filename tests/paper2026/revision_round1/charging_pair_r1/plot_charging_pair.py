@@ -15,7 +15,6 @@ for col, (mode, label, color) in enumerate(zip(['predicted','fresh'], ['Predicte
         ax.plot(x[:,0], x[:,col], color=color, lw=1.2, label=label)
     axes[1].axhline(s[mode]['8-10ns'], color=color, ls='--', lw=.75, alpha=.7)
 axes[0].axvspan(8, 10, color='0.5', alpha=.12)
-axes[0].axvline(2, color='0.5', ls=':', lw=.7)
 axes[0].set(xlim=(0,10), ylim=(0,19), ylabel='Electrode charge (e)')
 axes[0].legend(frameon=False, fontsize=8, loc='lower right')
 axes[1].set(xlim=(8,10), ylim=(16.5,18), xticks=[8,8.5,9,9.5,10])
